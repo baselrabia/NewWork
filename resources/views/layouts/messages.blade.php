@@ -30,6 +30,4 @@
 			{{ session('info')}}
 		</p>
 	</div>
-
-
 @endif

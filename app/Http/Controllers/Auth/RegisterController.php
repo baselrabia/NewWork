@@ -46,7 +46,10 @@ class RegisterController extends Controller
     	 	'sec_question'=>'required|string|in:where_are_you_from,what_is_your_hobby,what_is_your_favorite_car,who_is_your_favorite_doctor_or_teacher',
     	 	'sec_answer'=> ['regex:/^[a-zA-Z0-9 ]*$/','required','min:3','max:32','string'],
     	 	'dob'=> 'required|date|before_or_equal:2010-01-01|date_format:Y-m-d',
-    	 	 'gender'=> 'required|string|in:male,female',
+    	 	'gender'=> 'required|string|in:male,female',
+            'job_position' =>'string|min:3|max:80',
+            'company_name'=>'string|min:3|max:80',
+            'register_as' => 'required',
     	 	
 
 
@@ -65,6 +68,8 @@ class RegisterController extends Controller
     	 	'secuirty_answer'=> request()->sec_answer,
     	 	'dob'=> request()->dob,
     	 	'gender'=> request()->gender,
+            'job_position' => request()->job_position,
+            'company_name'=> request()->company_name,
     	 	
     	 ]);
 		
@@ -73,9 +78,13 @@ class RegisterController extends Controller
 
          Mail::to($user)->send(new UserActivation($user,$activationToken));
 
-         $role = Sentinel::findRoleBySlug('user');
-         $role->users()->attach($user);
-
+         if(request()->register_as == 'user' ){
+                $role = Sentinel::findRoleBySlug('user');
+                $role->users()->attach($user);
+            }elseif(request()->register_as == 'recruiter'){
+                $role = Sentinel::findRoleBySlug('recruiter');
+                $role->users()->attach($user);
+            }
 
     	return redirect()->route('login')->with('success','you have been Registered Successfully, Check your email for verify');
 

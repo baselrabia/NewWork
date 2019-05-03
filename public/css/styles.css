@@ -586,6 +586,7 @@ footer .rights{padding: 10px 0;background: #101621;margin-top: 30px;}
 .recrutier .posted{
   margin-top: 0;
   font-weight: bold;
+  font-size: 1.2em;
   color:#666;
   text-transform: capitalize;
 }
@@ -693,7 +694,6 @@ footer .rights{padding: 10px 0;background: #101621;margin-top: 30px;}
   overflow: hidden;
 }
 .job-holder img{
-  margin-top: 25%;
   width: 100%;
   transition: 0.3s all;
 }
@@ -717,7 +717,12 @@ footer .rights{padding: 10px 0;background: #101621;margin-top: 30px;}
   position: relative;
   top: 0;
   margin-left: 150px;
+      line-height: 20px;
 }
+.job-holder .content b{
+      font-size: 21px;
+}
+
 .job-holder .address{
   font-size: 12px;
 }
@@ -776,6 +781,86 @@ footer .rights{padding: 10px 0;background: #101621;margin-top: 30px;}
   padding: 0 ;
 }
 
+.black-layer{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: -webkit-fill-available;
+    overflow: hidden;
+    z-index: 10;
+    background-color: rgba(0,0,0,.5);
+}
+.cover-photo{
+  height:269px;
+    overflow: hidden;
+    background-color: #fff;
+
+}
+.cover_logo{
+max-width: 800px;
+    vertical-align: middle;
+    position: relative;
+    display: none;
+    top: 50%;
+    -webkit-transform: translateY(-18%);
+    -ms-transform: translateY(-18%);
+    transform: translateY(-18%);
+    -webkit-filter: blur(40px);
+    -moz-filter: blur(40px);
+    -o-filter: blur(40px);
+    -ms-filter: blur(40px);
+    filter: blur(40px);
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='40');
+}
+
+.company_main_info{
+color: #fff;
+    font-size: .9em;
+    position: absolute;
+    left: 30px;
+    bottom : 53px;
+    z-index: 50;
+    text-align: left;
+        line-height: 50px;
+
+
+    
+}
+
+.job-header-no-cover{
+      color: #fff;
+    font-size: 1.3em;
+    font-weight: 700;
+    position: absolute;
+    left: 30px;
+    top: 25px;
+    z-index: 50;
+  }
+
+.header-container {
+        
+    border: 1px solid #D0D0D0;
+    position: relative;
+    padding: 0px;
+}
+.header-container .cover-photo img {
+     width: 750px; 
+}
+
+.header-container  a {
+    color: #fff;
+}
+
+.job-header-span-cover{
+  color: #fff;
+  position: absolute;
+    right: 30px;
+    top: 15px;
+    z-index: 50;
+     font-size: 1.1em;
+    font-weight: 500;
+}
 /*mobile responsive*/
 @media (max-width: 768px){
   body{ font-size: 0.9em!important; }

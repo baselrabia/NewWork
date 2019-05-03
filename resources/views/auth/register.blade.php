@@ -82,7 +82,32 @@
                                 <label for="Location"> Location </label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" placeholder="United States" name="location" value="{{ old('location')}}" required>
+                                        <select class="form-control" id="location" name="location" value= "{{ old('location') }}" required></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                <label for="register_as"> Register As </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                        <select class="form-control" id="register_as" name="register_as" value= "{{ old('register_as') }}" required>
+                                            <option disabled selected>Please Select Register As</option>
+                                            <option value="user">Job Seeker</option>
+                                            <option value="recruiter">Hr Recruiter</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                <label for="job_position"> Job Position </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-briefcase" aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" placeholder="Type Your Job Position" name="job_position" value="{{ old('job_position')}}" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                <label for="company_name">  Company Name </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-building-o" aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" placeholder="Type Your Company Name" name="company_name" value="{{ old('company_name')}}" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -115,9 +140,9 @@
                             <div class="form-group">
                                  <label for="gender"> Gender </label>
                                     <div class="input-group">
-                                           <input type="radio" value="male" id="male" name="gender">
+                                           <input type="radio" value="male" id="male" name="gender" style="margin: 2px 5px 0px 5px;">  
                                             <label for="male">Male</label>
-                                            <input type="radio" id="female" name="gender" value="female" style="margin-left: 30px">
+                                            <input type="radio" id="female" name="gender" value="female" style="margin: 2px 5px 0px 20px;">  
                                             <label for="female">Female</label>
                                     </div>                               
                             </div>

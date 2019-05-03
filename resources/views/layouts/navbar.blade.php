@@ -15,10 +15,10 @@
 
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="{{ url('/home') }}">Home</a></li>
-                        <li><a href="search.html">Search</a></li>
-                        <li><a href="create_job.html">Create Job</a></li>
+                        <li><a href="{{ route('jobs.index') }}">Search</a></li>
+                        <li><a href="{{ route('jobs.create') }}">Create Job</a></li>
                         <li>
-                            <a href="#" data-toggle="popover" title="Find a Job"
+                            <a href="{{ route('jobs.index') }}" data-toggle="popover" title="Find a Job"
                             data-content='
                             <!-- <h4 class="title">Find a Job</h4> -->
                             <ul>
@@ -30,6 +30,13 @@
                             </ul>'
                             >Jobs</a>
                         </li>
+                        <li><a href="{{ route('companies.index') }}" data-toggle="popover" title="Create Company"
+                            data-content='
+                            <!-- <h4 class="title">Create Company</h4> -->
+                            <ul>
+                            <li><a href="{{ route('companies.create') }}">Create Company</a></li>
+                           
+                            </ul>' >Companies</a></li>
 
                     </ul>
 
@@ -81,7 +88,7 @@
                             <li>
                                 <a href="#" data-toggle="popover" style="padding:10px" title="{{ Sentinel::getUser()->first_name }} profile" data-content='
                                     <ul>
-                                        <li><a href="#"><span class="fa fa-lock"></span> Change Password</a></li>
+                                        <li><a href="{{ route('change-password') }}"><span class="fa fa-lock"></span> Change Password</a></li>
                                         <li><a href="#"><span class="fa fa-user"></span> Edit Profile</a></li>
                                         <li><a href="#"><span class="fa fa-gear"></span> Settings</a></li>
                                         <li><form id="logout-form" action="{{ route('logout') }}" method="POST">

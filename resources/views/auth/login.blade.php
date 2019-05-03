@@ -26,7 +26,7 @@
                                     <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
                                 </div>
 
-                                <p class=" pull-right"><small><a href="{{ route('login') }}"> Forgot Your Password ? </a></small></p>
+                                <p class=" pull-right"><small><a href="{{ route('reset') }}"> Forgot Your Password ? </a></small></p>
 
                                   <div class="form-group">
                                     <div class="col-md-6 col-md-offset-1">

@@ -106,6 +106,8 @@ class MigrationCartalystSentinel extends Migration
             $table->string('gender', 20)->default('female');
             $table->date('dob');  
             $table->string('location');
+            $table->string('job_position')->nullable();
+            $table->string('company_name')->nullable();
             $table->string('profile_picture')->default('default.png');
             $table->integer('salary')->unsigned()->nullable();
             $table->text('biography')->nullable();

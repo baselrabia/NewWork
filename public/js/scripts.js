@@ -58,10 +58,27 @@ $(document).ready(function () {
         x += '<div class="checkbox checkbox-primary"><input id="search-country-'+i+'" type="checkbox"><label for="search-country-'+i+'">'+r[i]+'</label></div>';
     }
     $( '#countries' ).html(x);
-    x='';
-    r=['1 year','1-2 years','2-5 years','5-8 years','8-12 years','12-16 years','16-20 years']
+    x='<option disabled selected>Please Select Location</option>';
+    for (var i = 0; i < r.length ; i++) {
+        x += '<option value="'+r[i]+'">'+r[i]+'</option>';
+    }
+    $( '#location' ).html(x);
+
+
+    x='';  r =  ['WordPress','Microsoft','Office','Adobe','Photoshop','Adobe Photoshop','Adobe Illustrator','Adobe Indesign','Interface Design','Information Technology (IT)','Graphic Design','Web Design','HTML','CSS','jQuery','Bootstrap Framework','Testing','Animation','Human Resources (HR)','Recruitment','Interviews','Employee Relations','Employment Law','IT/Software Development','Marketing/PR/Advertising','Project/Program Management','Startup','magento','HTML5','CSS3','PostgreSQL','GitPlus','Angular','TypeScript','React','Computer Science','Software Engineering','Python','Web Development','Software Development','Linux','Diango','REST','Shell Scripting','Software Technologies','API'];
+    for (var i = 0; i < r.length ; i++) {
+        x += '<option value="'+r[i]+'">'+r[i]+'</option>';
+    }
+    $( '#skillslist' ).html(x);
+
+
+    
+    x=''; r=['Less than 1 year','1-2 years','2-5 years','5-8 years','8-12 years','12-16 years','16-20 years'];
     for (var i = 0; i < r.length ; i++) {
         x += '<div class="checkbox checkbox-primary"><input id="search-ex-'+i+'" type="checkbox"><label for="search-ex-'+i+'">'+r[i]+'</label></div>';
     }
     $( '#experience' ).html(x);
+
+
+
 });

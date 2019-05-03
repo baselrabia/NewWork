@@ -19,17 +19,24 @@ class LoginController extends Controller
     	request()->validate([
             'email' => new \App\Rules\usernameOrEmail,
             'password' => 'required|string|min:6|max:32',
+           'remember' => 'in:on,null'
            
-           
-        ]);
+        ],['remember.in' =>'invalid Value']);
 
-        $login = \App\User::whereUsernameOrEmail(request()->email,request()->email)->first()->email;
+    $remember = false;
+    if (request()->remember === 'on'){
+        $remember = true;
+    }
+
+        if($login = \App\User::whereUsernameOrEmail(request()->email,request()->email)->first()){
 
 
         $user = Sentinel::Authenticate([
-        'login' => $login,
+        'login' => $login->email,
     	'password'=> request()->password,
-    	 ]);
+    	 ],$remember);
+
+  
 
         if($user){
             if (Activation::completed($user)){
@@ -44,7 +51,7 @@ class LoginController extends Controller
                 return redirect()->route('login')->with('error','Perhaps you forget to activate your account !!! ');
               
 
-        }}
+        }}}
 
         return redirect()->back()->with('error', 'invalid Credentials');
 
@@ -57,7 +64,7 @@ class LoginController extends Controller
     public function logout(){
 
     	Sentinel::logout(null,true);
-    	return redirect()->route('login')->with('success',' Come Back .. When Ever You Can');
+    	return redirect()->route('login')->with('success',' Come Back .. Whenever You Can');
 
     }
 }
