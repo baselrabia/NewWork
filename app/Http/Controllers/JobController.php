@@ -42,7 +42,7 @@ class JobController extends Controller
     public function store(Request $request)
     {
 
-        dd(Request()->all());
+        
          request()->validate([
             'name'  => 'required|string|min:3|max:200',
             'title' => 'required|string|min:3|max:200',
@@ -52,7 +52,7 @@ class JobController extends Controller
             'location' => 'required|string|min:3|max:50',
             'address' => 'required|string|min:3|max:100',
             'company_name' => 'required|string|min:3|max:50',
-            'experience' => 'string|min:3|max:200',
+            'experience' => 'string|max:3',
             'education' => 'string|min:3|max:200',
             'career_level' => 'string|min:3|max:200',
             'skills' => ['required','string','regex:/^[a-zA-Z0-9-_., ]*$/','min:3','max:150'],
@@ -61,12 +61,16 @@ class JobController extends Controller
 
         ]);
 
-          
+         
 
-         if(!Company::whereName(request('company_name'))->first){
-            return redirect()->route('company.create')->with('info','It Is Important To Register Your Company With Us ,So You Can Attach Jobs'); 
+         if(!Company::whereName(request('company_name'))->first()){
+            return redirect()->route('companies.create')->with('info','It Is Important To Register Your Company With Us ,So You Can Attach Jobs'); 
         }
+        $company_id=Company::whereName(request('company_name'))->first()->id;
+       
 
+        if (\App\Skill::assignSkills(request('skills'))){
+            if (\App\Keyword::assignKeywords(request('keywords'))){
 
         $job = job::Create([
             'name'  => request('name'),
@@ -77,14 +81,36 @@ class JobController extends Controller
             'experience' =>request('experience'),
             'education' =>request('education'),
             'career_level' =>request('career_level'),
-            'skills' => request('skills'),
             'salary' => request('salary'),
             'location' => request('location'),
             'address' => request('address'),
             'company_name' => request('company_name'),
+            'company_id' => $company_id,
             'admin_id'=>Sentinel::getUser()->id,
            
         ]);
+
+        if(is_array(\Session::get('skills'))){
+                foreach(\Session::get('skills') as $skill){
+
+                    $job->skills()->attach($skill);
+                }
+            }else{
+                $job->skills()->attach(\Session::get('skills'));
+                
+            }
+            \Session::forget('skills');
+
+        if(is_array(\Session::get('keywords'))){
+                foreach(\Session::get('keywords') as $keyword){
+
+                    $job->keywords()->attach($keyword);
+                }
+            }else{
+                $job->keywords()->attach(\Session::get('keywords'));
+                
+            }
+            \Session::forget('keywords');
 
        
 
@@ -92,7 +118,8 @@ class JobController extends Controller
 
         return redirect()->route('jobs.index')->with('success','Job Has Been Created Successfully'); 
 
-
+            }
+        }
 
     }
 

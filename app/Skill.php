@@ -2,12 +2,12 @@
 
 namespace App;
 
+use Sentinel;
 use Illuminate\Database\Eloquent\Model;
 
 class Skill extends Model
 {
    
-    private static $delimeters = [' ',','];
     protected $fillable = ['name','admin_id'];
 
 
@@ -25,7 +25,7 @@ class Skill extends Model
 
 
     public static function delimeters($request){
-        
+         $delimeter = ',';
             if(strpos($request,$delimeter)){
                 $delimeters[] = $delimeter;    
             } 
@@ -40,12 +40,14 @@ class Skill extends Model
             $inserted_skills = preg_split('/(,   |,  |, |,)/',$new);
                
            foreach ($inserted_skills as $skill) {
-               if($skills->where('name',str_slug($skill))->exists()){
-                    $user_skills[] = Tag::whereName(['name' => $skill])->get();
+            $skillSlug = str_slug($skill);
+
+               if($skills->where('name', $skillSlug)->exists()){
+                    $user_skills[] = Skill::whereName(['name' =>  $skillSlug])->get();
                     continue;
                }
-               $skills->create(['name' => str_slug($skill) , 'admin_id' => Sentinel::getUser()->id]);
-               $user_skills[] = Tag::whereName($skill)->get();
+               $skills->create(['name' => $skillSlug , 'admin_id' => Sentinel::getUser()->id]);
+               $user_skills[] = Skill::whereName( $skillSlug )->get();
                
            }
          
@@ -57,6 +59,7 @@ class Skill extends Model
             }            
             $user_skills = $skills->where('name',str_slug($new))->first();
         }
+
         \Session::put('skills',$user_skills);
         return true;
     }

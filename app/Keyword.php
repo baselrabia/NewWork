@@ -2,11 +2,12 @@
 
 namespace App;
 
+use Sentinel;
 use Illuminate\Database\Eloquent\Model;
 
 class Keyword extends Model
 {
-    private static $delimeter = ', ';
+     
     protected $fillable = ['name','admin_id'];
 
 
@@ -24,7 +25,8 @@ class Keyword extends Model
 
 
     public static function delimeters($request){
-        
+        $delimeter = ',';
+
             if(strpos($request,$delimeter)){
                 $delimeters[] = $delimeter;    
             } 
@@ -39,12 +41,14 @@ class Keyword extends Model
             $inserted_keywords = preg_split('/(,   |,  |, |,)/',$new);
                
            foreach ($inserted_keywords as $keyword) {
-               if($keywords->where('name',str_slug($keyword))->exists()){
-                    $user_keywords[] = Tag::whereName(['name' => $keyword])->get();
+            $keywordSlug = str_slug($keyword);
+
+               if($keywords->where('name', $keywordSlug)->exists()){
+                    $user_keywords[] = Keyword::whereName(['name' => $keywordSlug])->get();
                     continue;
                }
-               $keywords->create(['name' => str_slug($keyword) , 'admin_id' => Sentinel::getUser()->id]);
-               $user_keywords[] = Tag::whereName($keyword)->get();
+               $keywords->create(['name' => $keywordSlug , 'admin_id' => Sentinel::getUser()->id]);
+               $user_keywords[] = Keyword::whereName($keywordSlug)->get();
                
            }
          
@@ -56,6 +60,7 @@ class Keyword extends Model
             }            
             $user_keywords = $keywords->where('name',str_slug($new))->first();
         }
+        
         \Session::put('keywords',$user_keywords);
         return true;
     }

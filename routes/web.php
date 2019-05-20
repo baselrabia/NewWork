@@ -142,6 +142,8 @@ Route::get('/s', function () {
    
 // split the phrase by any number of commas or space characters,
 // which include " ", \r, \t, \n and \f
+
+	dd(\App\Skill::assignSkills('hypertext language,  proaagramming ,trreprogramming  , programming, programming ryete'));
 $keywords = preg_split("/(,  |, |,)/", "hypertext language,  proaagramming ,trreprogramming  , programming, programming ryete");
 print_r($keywords);
 

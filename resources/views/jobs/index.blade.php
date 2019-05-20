@@ -31,6 +31,8 @@
 
                 <div class="col-xs-12 col-sm-8 col-md-9">
                     <div class="row">
+                        @include('layouts.messages')
+
                         <div class="col-xs-12">
                             <div class="sub sub-l sub-xs-t job-description" style="overflow: hidden;">
                                 <ul class="pagination pull-right">
@@ -50,26 +52,26 @@
                             <div class="row">
                                 <div class="sub">                            
                                     <div class="image">
-                                        <img src="images/jobs/{{ $job->logo }}" class="img img-circle">
+                                        <img src="images/jobs/{{ $job->company->logo }}" class="img img-circle">
                                     </div>
                                     <div class="content">
                                         <button class="btn btn-success apply">Apply</button>
                                         <div class="details">
-                                            <a href="#"><b>PHP Developer</b></a>
+                                            <a href="{{ route('jobs.show',$job) }}"><b>{{ $job->name }}</b></a>
                                             <span class="work-type label label-success">{{ $job->job_type }}</span>
-                                            <span class="date" >Posted on {{ $job->created_at }}</span>
+                                            <span class="date" >Posted on {{ $job->created_at->format('d M Y') }}</span>
                                             <p class="title">{{ $job->title }}</p>
                                             <p class="address">
-                                                <a class="company" href="">{{ $job->company_name }}</a>
+                                                <a class="company" href="{{ route('companies.show',$job->company) }}">{{ $job->company_name }}</a>
                                                 {{ $job->location }} / {{ $job->address }} 
                                                 </p>
                                                 
                                             <p>
-                                                {!! $job->description !!} <span>... <a href="{{ route('job.show',$job) }}">See more</a></span>
+                                                 {!! nl2br($job->description) !!} <span>... <a href="{{ route('jobs.show',$job) }}">(See more)</a></span>
                                             </p>
                                             <div class="skills">
-                                                @foreach($skills as $skill) 
-                                                    <a href="#">{{ $skill }}</a>
+                                                @foreach($job->skills as $skill) 
+                                                    <a href="#">{{ $skill->name }}</a>
                                                 @endforeach
                                             </div>
                                         </div>

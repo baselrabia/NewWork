@@ -17,6 +17,7 @@
   <div class="container m-t-65 recrutier">
             <div class="row">
 
+
                 <div class="col-xs-12">
                     <div class="sub sub-l sub-xs-t">
 
@@ -24,6 +25,7 @@
                             <div class="col-md-6 col-md-offset-3">
                             
                                 <h3 style="margin-bottom: 25px; text-align: center;">Create new Job</h3>
+                                 @include('layouts.messages')
 
                                 <form action="{{ route('jobs.store') }}" method="POST" enctype="multipart/form-data">
                                  {{ csrf_field() }}
@@ -41,12 +43,12 @@
                                
                                   <div class="form-group">
                                     <label for="description">Job Description</label>
-                                    <textarea class="form-control" type="textarea" id="description" placeholder="Job Description ... " maxlength="140" name="description" rows="5"></textarea>
+                                    <textarea class="form-control" type="textarea" id="description" placeholder="Job Description ... "  name="description" rows="5"></textarea>
                                     <span class="help-block"><p id="characterLeft" class="help-block ">You have reached the limit</p></span>                    
                                 </div> 
                                 <div class="form-group">
                                     <label for="requirements">Job requirements</label>
-                                    <textarea class="form-control" type="textarea" id="requirements" placeholder="Job requirements ... " maxlength="140" name="requirements" rows="5"></textarea>
+                                    <textarea class="form-control" type="textarea" id="requirements" placeholder="Job requirements ... "  name="requirements" rows="5"></textarea>
                                     <span class="help-block">                  
                                 </div>
 

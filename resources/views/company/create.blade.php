@@ -12,6 +12,8 @@
                             <div class="col-md-6 col-md-offset-3">
                             
                                 <h3 style="margin-bottom: 25px; text-align: center;">Register Your Company</h3>
+                                @include('layouts.messages')
+
 
                                 <form action="{{ route('companies.store') }}" method="POST"  enctype="multipart/form-data" >
                                     {{ csrf_field() }}
